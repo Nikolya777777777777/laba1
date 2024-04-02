@@ -1,0 +1,8 @@
+public interface Petal{
+
+    public void toBlossom();
+
+    public void fadeAway();
+
+}
+//Можливо тут краще зробити через абстрактний клас?
