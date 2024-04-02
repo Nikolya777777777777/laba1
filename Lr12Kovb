@@ -1,0 +1,23 @@
+public class Lr12Kovb {
+
+    public static void main(String[] args) {
+        Flower flower = new Flower("Red");
+
+        flower.fadeAway();
+        flower.toBlossom();
+
+        Bud bud = new Bud("Yellow");
+
+        bud.printColor();
+
+
+    }
+
+}
+
+//завдання для цього основного класу та всіх інших тобто для класів Flower, Bud, Petal
+/*
+Створити об'єкт класу Квітка, використовуючи класи Пелюсток,
+Бутон. Методи: розквітнути, зів'янути, вивести на консоль колір
+бутона
+*/
