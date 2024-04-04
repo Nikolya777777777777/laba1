@@ -44,11 +44,37 @@ public class Lr11Kovb {
         }
     }
 
+    public String[] mergeArrays(Lr11Kovb otherArray) {
+        int totalLength = this.length + otherArray.getLength();
+        String[] mergedArray = new String[totalLength];
+
+        for (int i = 0; i < this.length; i++) {
+            mergedArray[i] = this.getElement(i);
+        }
+        for (int i = 0; i < otherArray.getLength(); i++) {
+            mergedArray[this.length + i] = otherArray.getElement(i);
+        }
+
+        return mergedArray;
+    }
+
+    public String[] mergeArraysIncludingDuplicates(Lr11Kovb otherArray) {
+        HashSet<String> mergedSet = new HashSet<>();
+        for (int i = 0; i < this.length; i++) {
+            mergedSet.add(this.getElement(i));
+        }
+        for (int i = 0; i < otherArray.getLength(); i++) {
+            mergedSet.add(otherArray.getElement(i));
+        }
+
+        return mergedSet.toArray(new String[0]);
+    }
+
     public static void main(String[] args) {
         Lr11Kovb array1 = new Lr11Kovb(5);
-        array1.setElement(0, "A");
-        array1.setElement(1, "B");
-        array1.setElement(2, "C");
+        array1.setElement(0, "1");
+        array1.setElement(1, "2");
+        array1.setElement(2, "3");
 
         Lr11Kovb array2 = new Lr11Kovb(7);
         array2.setElement(0, "1");
@@ -58,22 +84,20 @@ public class Lr11Kovb {
         array1.printArray();
         array2.printArray();
 
-        HashSet<String> mergedSet = new HashSet<>();
-        for (int i = 0; i < array1.getLength(); i++) {
-            mergedSet.add(array1.getElement(i));
-        }
-        for (int i = 0; i < array2.getLength(); i++) {
-            mergedSet.add(array2.getElement(i));
-        }
-
-        String[] mergedArray = mergedSet.toArray(new String[0]);
-
+        String[] mergedArray = array1.mergeArrays(array2);
         System.out.println("Merged array:");
         for (String element : mergedArray) {
             System.out.println(element);
         }
+
+        String[] mergedArrayExcludingDuplicates = array1.mergeArraysIncludingDuplicates(array2);
+        System.out.println("Merged array excluding duplicates:");
+        for (String element : mergedArrayExcludingDuplicates) {
+            System.out.println(element);
+        }
     }
 }
+
 //Завдання тільки для цього класу
 /*
 Скласти опис класу для визначення одновимірних масивів строк
