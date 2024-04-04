@@ -1,10 +1,20 @@
-public class Bud extends Flower{
+public abstract class Bud implements Petal {
+    public String color;
 
     public Bud(String color) {
-        super(color);
+        this.color = color;
     }
 
     public void printColor() {
-        System.out.println("The color of bud is " + getColor());
+        System.out.println("The color of bud is " + color);
     }
+
+    @Override
+    public abstract boolean equals(Object obj);
+
+    @Override
+    public abstract int hashCode();
+
+    @Override
+    public abstract String toString();
 }
