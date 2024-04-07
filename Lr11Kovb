@@ -4,6 +4,10 @@ public class Lr11Kovb {
     private String[] array;
     private int length;
 
+    public Lr11Kovb() {
+        
+    }
+
     public Lr11Kovb(int length) {
         this.length = length;
         this.array = new String[length];
@@ -29,14 +33,6 @@ public class Lr11Kovb {
         }
     }
 
-    public void printElement(int index) {
-        if (index >= 0 && index < length) {
-            System.out.println("Element " + index + ": " + array[index]);
-        } else {
-            throw new IndexOutOfBoundsException("Invalid index");
-        }
-    }
-
     public void printArray() {
         System.out.println("String array:");
         for (int i = 0; i < length; i++) {
@@ -44,21 +40,23 @@ public class Lr11Kovb {
         }
     }
 
-    public String[] mergeArrays(Lr11Kovb otherArray) {
+    public Lr11Kovb mergeArrays(Lr11Kovb otherArray) {
         int totalLength = this.length + otherArray.getLength();
-        String[] mergedArray = new String[totalLength];
+        Lr11Kovb mergedArray = new Lr11Kovb(totalLength);
 
         for (int i = 0; i < this.length; i++) {
-            mergedArray[i] = this.getElement(i);
+            mergedArray.setElement(i, this.getElement(i));
         }
+
         for (int i = 0; i < otherArray.getLength(); i++) {
-            mergedArray[this.length + i] = otherArray.getElement(i);
+            mergedArray.setElement(this.length + i, otherArray.getElement(i));
         }
 
         return mergedArray;
     }
 
-    public String[] mergeArraysIncludingDuplicates(Lr11Kovb otherArray) {
+
+    public Lr11Kovb mergeArraysExcludingDuplicates(Lr11Kovb otherArray) {
         HashSet<String> mergedSet = new HashSet<>();
         for (int i = 0; i < this.length; i++) {
             mergedSet.add(this.getElement(i));
@@ -67,7 +65,13 @@ public class Lr11Kovb {
             mergedSet.add(otherArray.getElement(i));
         }
 
-        return mergedSet.toArray(new String[0]);
+        Lr11Kovb mergedArray = new Lr11Kovb(mergedSet.size());
+        int index = 0;
+        for (String element : mergedSet) {
+            mergedArray.setElement(index++, element);
+        }
+
+        return mergedArray;
     }
 
     public static void main(String[] args) {
@@ -77,35 +81,19 @@ public class Lr11Kovb {
         array1.setElement(2, "3");
 
         Lr11Kovb array2 = new Lr11Kovb(7);
-        array2.setElement(0, "1");
-        array2.setElement(1, "2");
-        array2.setElement(2, "3");
+        array2.setElement(0, "A");
+        array2.setElement(1, "B");
+        array2.setElement(2, "C");
 
         array1.printArray();
         array2.printArray();
 
-        String[] mergedArray = array1.mergeArrays(array2);
+        Lr11Kovb mergedArray = array1.mergeArrays(array2);
         System.out.println("Merged array:");
-        for (String element : mergedArray) {
-            System.out.println(element);
-        }
+        mergedArray.printArray();
 
-        String[] mergedArrayExcludingDuplicates = array1.mergeArraysIncludingDuplicates(array2);
+        Lr11Kovb mergedArrayExcludingDuplicates = array1.mergeArraysExcludingDuplicates(array2);
         System.out.println("Merged array excluding duplicates:");
-        for (String element : mergedArrayExcludingDuplicates) {
-            System.out.println(element);
-        }
+        mergedArrayExcludingDuplicates.printArray();
     }
 }
-
-//Завдання тільки для цього класу
-/*
-Скласти опис класу для визначення одновимірних масивів строк
-фіксованої довжини. Передбачити контроль виходу за межі масиву,
-можливість звернення до окремих рядків масиву за індексами,
-виконання операцій поелементного зчеплення двох масивів з
-утворенням но
-вого масиву, злиття двох масивів з виключенням
-повторюваних елементів, а також виведення на екран елемента масиву
-по заданому індексу та виведення всього масиву.
-*/
